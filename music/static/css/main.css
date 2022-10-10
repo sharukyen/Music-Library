@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+h1{
+    font-weight: bold;
+}
+.bar{
+    text-align:left;
+    font-weight:bold;
+    color:black;
+    height:6vh;
+    background-color: #4378b4;
+    padding-top:1vh;
+}
+.range{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    font-size:2.5vh;
+    font-weight:bold;
+}
+
+#searchtext{
+    color:black;
+    text-decoration:none;
+    padding-left:1%;
+}
+
+#searchtext1{
+    color:black;
+    text-decoration:none;
+    padding-left:4%;
+}
+
+#searchtext1:hover{
+    color:white;
+
+}
+#searchtext:hover{
+    color:white;
+    
+}
+.coldplay{
+    float:right;
+    width:75vh;
+    margin-right:28vh;
+}
+.dragons{
+    float:left;
+    width:75vh;
+    margin-left:28vh;
+}
+.pad{
+    margin-bottom:27%;
+}
+
+.band{
+    text-align:center;
+    font-weight:bold;
+}
+.main {
+    padding-left: 22%;
+    padding-top: 2%;
+}
+
+.tracks{
+    padding-top:5vh;
+}
+
+.titletrack{
+    text-align:center;
+    font-size:3.5vh;
+    font-weight:bold;
+}
+.smalltrack{
+    font-size:1.8vh;
+    text-align:center;
+}
+table{
+    word-wrap: break-word;
+    border: 1px solid black;
+}
+
+.btn-nav {
+    padding: 10px;
+    border-bottom: 1px solid #bdb8d7;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    color: #bdb8d7;
+    display: block;
+}
+
+.btn-nav:hover {
+    background-color: #594f8d;
+    color: #fff;
+}
+
+.btn-general {
+    background-color: #4378b4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+}
+
+.btn-general-disabled {
+    background-color: #24639a;
+    border: none;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+    color:white;
+    opacity: 0.6;
+}
+
+.btn-general:hover {
+    background-color: #0a59b2;
+    color: white;
+}
