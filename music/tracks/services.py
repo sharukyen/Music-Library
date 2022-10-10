@@ -45,7 +45,7 @@ def track_to_dict(track: Track):
         'track_id': track.track_id,
         'track_title': track.title,
         'track_url': track.track_url,
-        'track_duration':track.track_duration,
+        'track_duration': track.track_duration,
     }
     return track_dict
 
