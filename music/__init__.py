@@ -19,7 +19,7 @@ from music.adapters.orm import metadata, map_model_to_tables
 
 def create_app(test_config = None):
     app = Flask(__name__)
-    
+
     app.config.from_object('config.Config')
     data_path = Path('music/adapters/data')
 
@@ -40,7 +40,8 @@ def create_app(test_config = None):
         repo.repo_instance = memory_repository.MemoryRepository()
         # fill the content of the repository from the provided csv files (has to be done every time we start app!)
         database_mode = False
-        repository_populate.populate(data_path, repo.repo_instance, database_mode)
+        repository_populate.\
+            populate(data_path, repo.repo_instance, database_mode)
 
     elif app.config['REPOSITORY'] == 'database':
         # Configure database.
