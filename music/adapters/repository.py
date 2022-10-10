@@ -33,6 +33,11 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_genres(self) -> List[Genre]:
+        """ Returns the Tags stored in the repository. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def add_genres(self, genre: Genre):
         """Adds Genres"""
         raise NotImplementedError
@@ -60,9 +65,4 @@ class AbstractRepository(abc.ABC):
     def get_tracks_by_range(self, range):
         """Gets track within a certain range"""
         raise NotImplementedError
-
-    # @abc.abstractmethod
-    # def get_reviews(self):
-    #     """ Returns the Comments stored in the repository. """
-    #     raise NotImplementedError
 
