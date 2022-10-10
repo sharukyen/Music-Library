@@ -1,3 +1,5 @@
+from typing import Optional
+
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
 from music.domainmodel.album import Album
@@ -15,10 +17,10 @@ class Track:
 
         self.__artist = None
         self.__album: Album | None = None
-        self.__track_url: str | None = None
+        self.__track_url: Optional[str] = None
         # duration in seconds
-        self.__track_duration: int | None = None
-        self.__genres: list = []
+        self.__track_duration: Optional[int] = None
+        self.__genres: list = [] # make sure that genre list is populated when creating track object
 
     @property
     def track_id(self) -> int:
@@ -70,6 +72,39 @@ class Track:
     @property
     def track_duration(self) -> int:
         return self.__track_duration
+
+    @track_duration.setter
+    def track_duration(self, new_duration: int):
+        self.__track_duration = None
+        if type(new_duration) is int and new_duration >= 0:
+            self.__track_duration = new_duration
+        else:
+            raise ValueError
+
+    @property
+    def genres(self) -> list:
+        return self.__genres
+
+    def add_genre(self, new_genre):
+        if not isinstance(new_genre, Genre) or new_genre in self.__genres:
+            return
+        self.__genres.append(new_genre)
+
+    def __repr__(self):
+        return f"<Track {self.title}, track id = {self.track_id}>"
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.track_id == other.track_id
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return True
+        return self.track_id < other.track_id
+
+    def __hash__(self):
+        return hash(self.track_id)
 
     @track_duration.setter
     def track_duration(self, new_duration: int):
