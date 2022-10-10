@@ -83,3 +83,4 @@ def map_model_to_tables():
         '_Artists__id': artist_table.c.artists_id,
         '_Artist__full_name': artist_table.c.artist_name
     })
+
