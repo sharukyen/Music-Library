@@ -6,7 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, SubmitField
 from wtforms.validators import DataRequired
 
-
+import music.adapters.repository as repo
 from music.tracks.services import get_all_tracks, get_tracks_by_range
 from music.adapters.repository import repo_instance
 from music.tracks import services
@@ -32,7 +32,7 @@ def list_track():
     else:
         cursor = int(cursor)
 
-    track_test = get_all_tracks(repo_instance)
+    track_test = get_all_tracks(repo.repo_instance)
     tracklist = track_test[cursor:cursor+20]
 
     first_track_url = None
@@ -66,6 +66,8 @@ def list_track():
     rangetop = str(toprange),
 
     )
+
+
 
 
  
