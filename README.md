@@ -1,12 +1,13 @@
-# COMPSCI 235 Starter Repository for Assignment 2
-This is a starter repository for the assignment 2 of CompSci 235 in Semester 2, 2022.
+# Music Library Repository
+This is the repository for the Music Library web app.
 
 
 ## Description
 
 A track browsing web application that uses Python's flask framework. 
 The application makes use of libraries such as the Jinja's templating library to build the front end.
-Architectural design patterns and principles including building the service layer, Repository  and the application uses Flask Blueprints to segment the components that makes up the application. 
+Architectural design patterns and principles including building the service layer, Repository.
+The application uses Flask Blueprints to segment the components that makes up the application. 
 Testing features includes unit and end-to-end testing using the pytest tool.
 
 ## Cloning the Repo
@@ -54,7 +55,7 @@ After you have configured pytest as the testing tool for PyCharm (File - Setting
 Alternatively, from a terminal in the root folder of the project, you can also call 'python -m pytest tests' to run all the tests. PyCharm also provides a built-in terminal, which uses the configured virtual environment. 
 
 ## Configuration
-The cs235_2022_assignment-nwu939_swu694/.env file contains variable settings. They are set with appropriate values.
+The .env file contains variable settings. They are set with appropriate values.
 
 FLASK_APP: Defines Entry point of the application (wsgi.py).
 FLASK_ENV: The environment in which to run the application (either development or production).
