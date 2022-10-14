@@ -1,10 +1,9 @@
-from typing import Optional
-
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
 from music.domainmodel.album import Album
+from datetime import datetime
 
-
+from typing import List, Iterable
 class Track:
     def __init__(self, track_id: int, track_title: str):
         if type(track_id) is not int or track_id < 0:
@@ -17,10 +16,11 @@ class Track:
 
         self.__artist = None
         self.__album: Album | None = None
-        self.__track_url: Optional[str] = None
+        self.__track_url: str | None = None
         # duration in seconds
-        self.__track_duration: Optional[int] = None
-        self.__genres: list = [] # make sure that genre list is populated when creating track object
+        self.__track_duration: int | None = None
+        self.__genres: list = []
+        self.__reviews: list[Review] = []
 
     @property
     def track_id(self) -> int:
@@ -39,6 +39,10 @@ class Track:
     @property
     def artist(self) -> Artist:
         return self.__artist
+
+    @property
+    def reviews(self) -> Iterable['Review']:
+        return iter(self.__reviews)
 
     @artist.setter
     def artist(self, new_artist):
@@ -85,10 +89,19 @@ class Track:
     def genres(self) -> list:
         return self.__genres
 
+
+    def number_of_genres_per_track(self) -> int:
+        return len(self.__)
+
     def add_genre(self, new_genre):
         if not isinstance(new_genre, Genre) or new_genre in self.__genres:
             return
         self.__genres.append(new_genre)
+    def add_review(self, new_review: 'Review'):
+        if new_review in self.__reviews:
+            return
+        self.__reviews.append(new_review)
+        return self
 
     def __repr__(self):
         return f"<Track {self.title}, track id = {self.track_id}>"
@@ -106,35 +119,62 @@ class Track:
     def __hash__(self):
         return hash(self.track_id)
 
-    @track_duration.setter
-    def track_duration(self, new_duration: int):
-        self.__track_duration = None
-        if type(new_duration) is int and new_duration >= 0:
-            self.__track_duration = new_duration
+class Review:
+
+    def __init__(self, track: Track, review_text: str, rating: int, user_name: str):
+        # self.__track = None
+        # if isinstance(track, Track):
+        self.__track = track
+        self.__review_text = 'N/A'
+        if isinstance(review_text, str):
+            self.__review_text = review_text.strip()
+
+        if isinstance(rating, int) and 1 <= rating <= 5:
+            self.__rating = rating
         else:
-            raise ValueError
+            raise ValueError('Invalid value for the rating.')
+
+        self.__timestamp = datetime.now()
+        self.__user_name = user_name
 
     @property
-    def genres(self) -> list:
-        return self.__genres
+    def track(self) -> int:
+        return self.__track
 
-    def add_genre(self, new_genre):
-        if not isinstance(new_genre, Genre) or new_genre in self.__genres:
-            return
-        self.__genres.append(new_genre)
+    @property
+    def review_text(self) -> str:
+        return self.__review_text
 
-    def __repr__(self):
-        return f"<Track {self.title}, track id = {self.track_id}>"
+    @review_text.setter
+    def review_text(self, new_text):
+        if type(new_text) is str:
+            self.__review_text = new_text.strip()
+        else:
+            self.__review_text = None
+
+    @property
+    def rating(self) -> int:
+        return self.__rating
+    @property
+    def user_name(self) -> str:
+        return self.__user_name
+
+    @rating.setter
+    def rating(self, new_rating: int):
+        if isinstance(new_rating, int) and 1 <= new_rating <= 5:
+            self.__rating = new_rating
+        else:
+            self.__rating = None
+            raise ValueError("Wrong value for the rating")
+
+    @property
+    def timestamp(self) -> datetime:
+        return self.__timestamp
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        return self.track_id == other.track_id
+        return other.track == self.track and other.review_text == self.review_text and other.rating == self.rating and other.timestamp == self.timestamp
 
-    def __lt__(self, other):
-        if not isinstance(other, self.__class__):
-            return True
-        return self.track_id < other.track_id
-
-    def __hash__(self):
-        return hash(self.track_id)
+    def __repr__(self):
+        return f'<Review of track {self.track}, rating = {self.rating}, review_text = {self.review_text}>'

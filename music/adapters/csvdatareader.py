@@ -7,7 +7,6 @@ from music.domainmodel.album import Album
 from music.domainmodel.track import Track
 from music.domainmodel.genre import Genre
 
-
 def create_track_object(track_row):
     track = Track(int(track_row['track_id']), track_row['track_title'])
     track.track_url = track_row['track_url']
@@ -55,6 +54,8 @@ def extract_genres(track_row: dict):
             print(f'Exception occurred while parsing genres: {e}')
 
     return genres
+
+
 
 
 class TrackCSVReader:
@@ -166,5 +167,4 @@ class TrackCSVReader:
             self.__dataset_of_tracks.append(track)
 
         return self.__dataset_of_tracks
-
 

@@ -8,12 +8,11 @@ from werkzeug.security import generate_password_hash
 from music.adapters.csvdatareader import TrackCSVReader
 
 from music.adapters.repository import AbstractRepository
-from music.domainmodel.track import Track
+from music.domainmodel.track import Track, Review
 from music.domainmodel.album import Album
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
 from music.domainmodel.playlist import PlayList
-from music.domainmodel.review import Review
 from music.domainmodel.user import User
 
 class MemoryRepository(AbstractRepository):
@@ -25,6 +24,8 @@ class MemoryRepository(AbstractRepository):
         self.__genre = list()
         self.__album = list()
         self.__artist = list()
+        self.__users = list()
+        self.__reviews = list()
     
 
 
@@ -60,6 +61,17 @@ class MemoryRepository(AbstractRepository):
         existing_ids = [id for id in range if id in self.__tracks_index]
         tracks = [self.__tracks_index[id] for id in existing_ids]
         return tracks
+    def add_user(self, user: User):
+        self.__users.append(user)
+
+    def get_user(self, user_name) -> User:
+        return next((user for user in self.__users if user.user_name == user_name), None)
+    def add_review(self, review:Review):
+        super().add_review(review)
+        self.__reviews.append(review)
+
+    def get_reviews(self):
+        return self.__reviews
 
 #def load_repo(repo: MemoryRepository):
 

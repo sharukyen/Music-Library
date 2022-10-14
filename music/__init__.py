@@ -29,9 +29,7 @@ def create_app(test_config = None):
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
 
-    with app.app_context():
-        from .tracks import tracks
-        app.register_blueprint (tracks.track_blueprint)
+
 
     if app.config['REPOSITORY'] == 'memory':
         # Create the MemoryRepository implementation for a memory-based repository.
@@ -93,4 +91,21 @@ def create_app(test_config = None):
             if isinstance(repo.repo_instance, database_repository.SqlAlchemyRepository):
                 repo.repo_instance.close_session()
 
+    with app.app_context():
+        from .tracks import tracks
+        app.register_blueprint (tracks.track_blueprint)
+
+        from .authentication import authentication
+        app.register_blueprint (authentication.authentication_blueprint)
+
+        @app.before_request
+        def before_flask_http_request_function():
+            if isinstance(repo.repo_instance, database_repository.SqlAlchemyRepository):
+                repo.repo_instance.reset_session()
+
+        # Register a tear-down method that will be called after each request has been processed.
+        @app.teardown_appcontext
+        def shutdown_session(exception=None):
+            if isinstance(repo.repo_instance, database_repository.SqlAlchemyRepository):
+                repo.repo_instance.close_session()
     return app

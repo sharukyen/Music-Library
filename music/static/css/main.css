@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -32,26 +33,22 @@ h1{
     font-weight:bold;
 }
 
-#searchtext{
+.nav-item-container {
+    margin-left: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-item {
     color:black;
     text-decoration:none;
-    padding-left:1%;
+    margin-right: 1em;
 }
 
-#searchtext1{
-    color:black;
-    text-decoration:none;
-    padding-left:4%;
-}
-
-#searchtext1:hover{
+.nav-item:hover {
     color:white;
+}
 
-}
-#searchtext:hover{
-    color:white;
-    
-}
 .coldplay{
     float:right;
     width:75vh;
@@ -133,4 +130,17 @@ table{
 .btn-general:hover {
     background-color: #0a59b2;
     color: white;
+}
+
+.comment-section {
+    visibility: hidden;
+    border: 1px solid;
+    padding: 1em;
+    margin-top: 1em;
+    height: 0;
+}
+
+.review {
+    border: 1px solid;
+    margin: 1em;
 }

@@ -3,8 +3,7 @@ from datetime import date, datetime
 from typing import List, Iterable
 
 
-from music.domainmodel.track import Track
-from music.domainmodel.review import Review
+from music.domainmodel.track import Track, Review
 from music.domainmodel.user import User
 from music.adapters.repository import AbstractRepository
 from music.adapters.repository import repo_instance
@@ -22,7 +21,7 @@ def get_track(track_id: int,repo: AbstractRepository ):
     if track is None:
         raise NonExistentTrackException
 
-    return track_to_dict(track)
+    return track
 
 
 def get_all_tracks(repo: AbstractRepository):
@@ -45,10 +44,17 @@ def track_to_dict(track: Track):
         'track_id': track.track_id,
         'track_title': track.title,
         'track_url': track.track_url,
-        'track_duration': track.track_duration,
+        'track_duration':track.track_duration,
     }
     return track_dict
 
 
 def tracks_to_dict(tracks: Iterable[Track]):
     return [track_to_dict(track) for track in tracks]
+
+def add_review(user: User, track: Track, comment: str, rating: int, repo: AbstractRepository):
+    review = Review(track, comment, rating, user)
+    track.add_review(review)
+    repo.add_review(review)
+    return review
+

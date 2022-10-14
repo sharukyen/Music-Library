@@ -1,3 +1,4 @@
+from typing import List, Iterable
 class Genre:
 
     def __init__(self, genre_id: int, genre_name: str):
@@ -25,6 +26,7 @@ class Genre:
             name = name.strip()
             if name != '':
                 self.__name = name
+
 
     def __repr__(self) -> str:
         return f'<Genre {self.name}, genre id = {self.genre_id}>'
